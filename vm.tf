@@ -4,10 +4,10 @@ resource "azurerm_virtual_machine" "main" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   network_interface_ids = [
-    azurerm_network_interface.main[count.index * 2].id,
-    azurerm_network_interface.main[count.index * 2 + 1].id
+    azurerm_network_interface.main[count.index].id
+    # azurerm_network_interface.main[count.index * 2 + 1].id
   ]
-  primary_network_interface_id = azurerm_network_interface.main[count.index * 2].id
+  # primary_network_interface_id = azurerm_network_interface.main[count.index * 2].id
   vm_size                       = "Standard_D2s_v6"
   delete_os_disk_on_termination = true
 
@@ -24,7 +24,7 @@ resource "azurerm_virtual_machine" "main" {
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "hostname"
+    computer_name  = "hostname-${count.index}"
     admin_username = var.admin_username
     admin_password = var.admin_password
   }

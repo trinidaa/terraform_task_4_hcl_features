@@ -18,7 +18,7 @@ resource "azurerm_subnet" "internal" {
 }
 
 resource "azurerm_network_interface" "main" {
-  count = (var.is_prod ? var.prod_vm : 2) * 2
+  count = (var.is_prod ? var.prod_vm : 2)
   name                = "${var.prefix}-nic-${floor(count.index / 2)}-${count.index % 2 + 1}"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name

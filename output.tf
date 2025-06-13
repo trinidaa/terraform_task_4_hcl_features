@@ -12,6 +12,6 @@ output "uppercase_vm_names" {
 
 output "all_vm_ids" {
   description = "IDs of all VMs"
-  value = { for k, vm in azurerm_virtual_machine.main : "vm-${tonumber(k) + 1}" => vm.id
+  value = { for k, vm in azurerm_virtual_machine.main : "vm-${k + 1}" => vm.id
   }
 }
